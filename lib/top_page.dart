@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({super.key});
@@ -7,6 +8,7 @@ class TopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // 画面幅を取得
     final double width = MediaQuery.of(context).size.width;
+    final Color bgColor = const Color.fromARGB(255, 250, 251, 255);
 
     // ブレークポイント判定
     // PC: 768px以上, タブレット: 481~767px, スマホ: 480px以下
@@ -14,111 +16,162 @@ class TopPage extends StatelessWidget {
     if (width >= 768) {
       // PC用（全体幅は1200px上限で可変、1200px以上は1200px固定。左カラム300px固定、右は残り幅）
       final double containerWidth = width > 1200 ? 1200 : width;
-      content = Stack(
-        children: [
-          Container(
+      content = SingleChildScrollView(
+        child: Center(
+          child: Container(
             margin: EdgeInsets.symmetric(horizontal: width * .06),
             width: containerWidth,
-            child: Row(
+            child: Column(
               children: [
-                Container(
-                  width: 300, // 左カラムは常に300px固定
-                  color: const Color.fromARGB(255, 250, 251, 255),
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(60, 80, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 0),
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            scale: 8,
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        width: 300,
+                        color: bgColor,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(60, 80, 0, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 0),
+                                child: Image.asset(
+                                  'assets/images/logo.png',
+                                  scale: 8,
+                                ),
+                              ),
+                              const SizedBox(height: 60),
+                              Column(
+                                spacing: 18,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ContentsText(
+                                    onTap: () {},
+                                    title: '施設紹介',
+                                    subMenu: [
+                                      ContentsText(
+                                          title: '才庭寮',
+                                          onTap: () {},
+                                          showArrow: false),
+                                      ContentsText(
+                                          title: 'ともやま苑',
+                                          onTap: () {},
+                                          showArrow: false),
+                                      ContentsText(
+                                          title: '花園寮',
+                                          onTap: () {},
+                                          showArrow: false),
+                                      ContentsText(
+                                          title: '福祉センター',
+                                          onTap: () {},
+                                          showArrow: false),
+                                    ],
+                                  ),
+                                  ContentsText(
+                                      onTap: () {},
+                                      title: '入所の流れ',
+                                      showArrow: false),
+                                  ContentsText(
+                                      onTap: () {},
+                                      title: '組合概要',
+                                      showArrow: false),
+                                  ContentsText(
+                                      onTap: () {},
+                                      title: '例規集',
+                                      showArrow: false),
+                                  ContentsText(
+                                      onTap: () {},
+                                      title: '入札情報',
+                                      showArrow: false),
+                                  ContentsText(
+                                      onTap: () {},
+                                      title: 'その他',
+                                      showArrow: false),
+                                  ContentsText(
+                                    onTap: () {},
+                                    title: '住所連絡先',
+                                    subMenu: [
+                                      Column(
+                                        spacing: 10,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Image.asset(
+                                            "assets/images/map.png",
+                                            scale: 6,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async {
+                                              final url = Uri.parse(
+                                                  'https://maps.app.goo.gl/XPQcFxXa6chUwxsq8');
+                                              await launchUrl(url);
+                                            },
+                                            child: Row(
+                                              spacing: 10,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/Google_Maps_Logo_2020.svg.png',
+                                                  scale: 15,
+                                                ),
+                                                const TextContent(
+                                                  title: 'Googleマップで探す',
+                                                  textSize: 14,
+                                                  textWeight: FontWeight.bold,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        spacing: 8,
+                                        children: [
+                                          TextContent(
+                                            title: '三重県志摩市阿児町神明1537-1',
+                                            textSize: 14,
+                                          ),
+                                          TextContent(
+                                            title: '電話 0599-43-211',
+                                            textSize: 14,
+                                          ),
+                                          TextContent(
+                                            title: 'Fax 0599-43-7279',
+                                            textSize: 14,
+                                          ),
+                                          TextContent(
+                                            title:
+                                                'E-mail sikouiki@shima.mctv.ne.jpv',
+                                            textSize: 14,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 60),
-                        Column(
-                          spacing: 18,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ContentsText(
-                              onTap: () {},
-                              title: '施設紹介',
-                              subMenu: [
-                                ContentsText(
-                                    title: '才庭寮',
-                                    onTap: () {},
-                                    showArrow: false),
-                                ContentsText(
-                                    title: 'ともやま苑',
-                                    onTap: () {},
-                                    showArrow: false),
-                                ContentsText(
-                                    title: '花園寮',
-                                    onTap: () {},
-                                    showArrow: false),
-                                ContentsText(
-                                    title: '福祉センター',
-                                    onTap: () {},
-                                    showArrow: false),
-                              ],
-                            ),
-                            ContentsText(
-                                onTap: () {}, title: '入所の流れ', showArrow: false),
-                            ContentsText(
-                                onTap: () {}, title: '組合概要', showArrow: false),
-                            ContentsText(
-                                onTap: () {}, title: '例規集', showArrow: false),
-                            ContentsText(
-                                onTap: () {}, title: '入札情報', showArrow: false),
-                            ContentsText(
-                                onTap: () {}, title: 'その他', showArrow: false),
-                            ContentsText(
-                              onTap: () {},
-                              title: 'Address',
-                              subMenu: [
-                                Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/map.png",
-                                      scale: 6,
-                                    ),
-                                  ],
-                                ),
-                                TextContent(
-                                  title: '三重県志摩市阿児町神明1537-1',
-                                  textSize: 14,
-                                ),
-                                TextContent(
-                                  title: '電話 0599-43-211',
-                                  textSize: 14,
-                                ),
-                                TextContent(
-                                  title: 'Fax 0599-43-7279',
-                                  textSize: 14,
-                                ),
-                                TextContent(
-                                  title: 'E-mail sikouiki@shima.mctv.ne.jpv',
-                                  textSize: 14,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: Colors.orange.shade100,
+                        ), // 右カラムは残り幅
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    color: const Color.fromARGB(255, 250, 251, 255),
-                  ), // 右カラムは残り幅
-                ),
+                const JobTab(),
               ],
             ),
           ),
-          const JobTab(),
-        ],
+        ),
       );
     } else if (width > 480 && width < 768) {
       // タブレット用
@@ -221,13 +274,10 @@ class _ContentsTextState extends State<ContentsText> {
                 horizontal: _isHover ? 8 : 0,
               ),
               decoration: BoxDecoration(
-                color: _isHover
-                    ? const Color.fromARGB(255, 80, 105, 246)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(_isHover ? 8 : 0),
-                    topLeft: Radius.circular(_isHover ? 8 : 0)),
-              ),
+                  color: _isHover
+                      ? const Color.fromARGB(255, 80, 105, 246)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(10)),
               child: Row(
                 children: [
                   AnimatedDefaultTextStyle(
