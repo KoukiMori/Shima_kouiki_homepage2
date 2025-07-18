@@ -15,7 +15,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-    <base href="/shima_kouiki_homepage">
+    <base href="/shima_kouiki_homepage/">
 
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -33,10 +33,6 @@
     <title>shime_kouiki_homepage</title>
     <link rel="manifest" href="manifest.json">
 
-    <script>
-        // The value below is injected by flutter build, do not touch.
-        var serviceWorkerVersion = null;
-    </script>
     <!-- This script adds the flutter initialization JS code -->
     <script src="flutter.js" defer></script>
   </head>
@@ -44,11 +40,8 @@
   <body>
     <script>
         window.addEventListener('load', function(ev) {
-            // Download main.dart.js
-            _flutter.loader.loadEntrypoint({
-                serviceWorker: {
-                    serviceWorkerVersion: serviceWorkerVersion,
-                },
+            _flutter.loader.load({
+                serviceWorkerVersion: '{{flutter_service_worker_version}}',
                 onEntrypointLoaded: function(engineInitializer) {
                     engineInitializer.initializeEngine().then(function(appRunner) {
                         appRunner.runApp();
