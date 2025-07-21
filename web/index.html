@@ -22,15 +22,15 @@
     <meta name="description" content="A new Flutter project.">
 
     <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="shime_kouiki_homepage">
+    <meta name="apple-mobile-web-app-title" content="shima_kouiki_homepage">
     <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png" />
 
-    <title>shime_kouiki_homepage</title>
+    <title>shima_kouiki_homepage</title>
     <link rel="manifest" href="manifest.json">
 
     <!-- This script adds the flutter initialization JS code -->
@@ -40,8 +40,12 @@
 <body>
     <script>
         window.addEventListener('load', function(ev) {
-            // Flutter Web初期化（最新の推奨方法・シンプル版）
-            _flutter.loader.load().then(function(engineInitializer) {
+            // Download main.dart.js
+            _flutter.loader.loadEntrypoint({
+                serviceWorker: {
+                    serviceWorkerVersion: null,
+                }
+            }).then(function(engineInitializer) {
                 return engineInitializer.initializeEngine();
             }).then(function(appRunner) {
                 return appRunner.runApp();

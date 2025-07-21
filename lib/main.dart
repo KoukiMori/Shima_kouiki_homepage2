@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shime_kouiki_homepage/top_page.dart';
+import 'top_page.dart';
 
 void main() {
   runApp(const MyApp());
