@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
@@ -35,21 +35,19 @@
 
     <!-- This script adds the flutter initialization JS code -->
     <script src="flutter.js" defer></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <script>
         window.addEventListener('load', function(ev) {
-            _flutter.loader.load({
-                serviceWorkerVersion: '{{flutter_service_worker_version}}',
-                onEntrypointLoaded: function(engineInitializer) {
-                    engineInitializer.initializeEngine().then(function(appRunner) {
-                        appRunner.runApp();
-                    });
-                }
+            // Flutter Web初期化（最新の推奨方法・シンプル版）
+            _flutter.loader.load().then(function(engineInitializer) {
+                return engineInitializer.initializeEngine();
+            }).then(function(appRunner) {
+                return appRunner.runApp();
             });
         });
     </script>
-  </body>
+</body>
 
 </html>

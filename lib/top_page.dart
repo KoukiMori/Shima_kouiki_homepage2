@@ -436,7 +436,7 @@ class _ContentsTextState extends State<ContentsText> {
                 curve: Curves.ease,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.subMenu!
+                  children: (widget.subMenu ?? [])
                       .map((sub) => Padding(
                             padding: const EdgeInsets.only(left: 16, top: 6),
                             child: sub,
