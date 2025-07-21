@@ -27,7 +27,7 @@ class _TopPageContentsState extends State<TopPageContents>
 
     // 左から右へのスライドアニメーション
     _slideAnimation = Tween<double>(
-      begin: -300.0, // 画面外左端から開始
+      begin: -400.0, // 画面外左端から開始
       end: -120.0, // 元の位置へ
     ).animate(CurvedAnimation(
       parent: _animationController,
@@ -36,7 +36,7 @@ class _TopPageContentsState extends State<TopPageContents>
 
     // テキスト：上から下へ
     _textSlideAnimation = Tween<double>(
-      begin: -100.0, // 上から開始
+      begin: 200.0, // 上から開始
       end: 60.0, // 元の位置へ
     ).animate(CurvedAnimation(
       parent: _animationController,
