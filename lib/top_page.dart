@@ -61,7 +61,7 @@ class _TopPageState extends State<TopPage> {
                     children: [
                       // サイドバー
                       Container(
-                        width: 300,
+                        width: 200,
                         color: bgColor,
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(60, 80, 0, 0),
@@ -400,7 +400,7 @@ class _ContentsTextState extends State<ContentsText> {
                   color: _isHover
                       ? const Color.fromARGB(255, 80, 105, 246)
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(6)),
               child: Row(
                 children: [
                   AnimatedDefaultTextStyle(
