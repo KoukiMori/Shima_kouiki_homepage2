@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 
 class ContentsText extends StatefulWidget {
   final String title;
@@ -86,7 +87,8 @@ class _ContentsTextState extends State<ContentsText> {
                       fontSize: _isHover ? 18 : 14, // ホバーでサイズ変化
                       fontWeight:
                           _isHighlighted ? FontWeight.bold : FontWeight.w800,
-                      color: _isHighlighted ? Colors.white : Colors.black,
+                      color:
+                          _isHighlighted ? Colors.white : MainColors.textColor,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -96,7 +98,9 @@ class _ContentsTextState extends State<ContentsText> {
                       duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.arrow_right,
-                        color: _isHighlighted ? Colors.white : Colors.black,
+                        color: _isHighlighted
+                            ? Colors.white
+                            : MainColors.textColor,
                         size: 30,
                       ),
                     ),

@@ -71,9 +71,7 @@ class ContentsMumu extends StatelessWidget {
           ),
           // その他
           ContentsText(
-            onTap: () {
-              onMenuSelected(MenuType.sonota);
-            },
+            onTap: () {},
             title: 'その他',
             subMenu: [
               ContentsText(

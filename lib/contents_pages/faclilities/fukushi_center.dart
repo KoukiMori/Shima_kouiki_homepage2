@@ -2,6 +2,7 @@ import 'package:flutter/material.dart'; // ContentsTextをインポート
 import 'package:shime_kouiki_homepage/contents_munu.dart';
 import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポートするため
 import 'package:shime_kouiki_homepage/address_unit.dart'; // AddressUnitをインポート
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 // import 'dart:math' as math; // 必要なら後で追加
 
 class FukushiCenter extends StatefulWidget {
@@ -39,7 +40,10 @@ class _FukushiCenterState extends State<FukushiCenter>
               },
             ),
             Center(
-              child: Text('福祉センター'),
+              child: Text(
+                '福祉センター',
+                style: TextStyle(color: MainColors.textColor),
+              ),
             ),
             const AddressUnit(),
           ],

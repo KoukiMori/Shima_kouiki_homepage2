@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shime_kouiki_homepage/faclilities/hanazono_ryo.dart';
-import 'package:shime_kouiki_homepage/faclilities/sainiwa_ryo.dart';
-import 'package:shime_kouiki_homepage/faclilities/tomoyama_en.dart';
-import 'package:shime_kouiki_homepage/job_page.dart'; // JobPageを追加
-import 'top_page_contents.dart';
+import 'package:shime_kouiki_homepage/contents_pages/faclilities/hanazono_ryo.dart';
+import 'package:shime_kouiki_homepage/contents_pages/faclilities/sainiwa_ryo.dart';
+import 'package:shime_kouiki_homepage/contents_pages/faclilities/tomoyama_en.dart';
+import 'package:shime_kouiki_homepage/contents_pages/job_page.dart'; // JobPageを追加
+import 'contents_pages/top_page_content/top_page_contents.dart';
 import 'package:google_fonts/google_fonts.dart'; // GoogleFontsを追加
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 
 // メニュー種別をenumで管理
 enum MenuType {
@@ -89,7 +90,7 @@ class _TopPageState extends State<TopPage> {
                           fontSize: 32,
                           decoration: TextDecoration.none,
                           fontWeight: FontWeight.w100,
-                          color: Colors.grey.shade600,
+                          color: MainColors.textColor,
                         ),
                       ),
                       Text(
@@ -98,7 +99,7 @@ class _TopPageState extends State<TopPage> {
                           fontSize: 12,
                           decoration: TextDecoration.none,
                           fontWeight: FontWeight.w100,
-                          color: Colors.grey.shade600,
+                          color: MainColors.textColor,
                         ),
                       ),
                     ],
@@ -123,7 +124,7 @@ class _TopPageState extends State<TopPage> {
           children: [
             Text(
               'モバイルレイアウト',
-              style: TextStyle(fontSize: 24, color: Colors.black),
+              style: TextStyle(fontSize: 24, color: MainColors.textColor),
             ),
             // 必要に応じてモバイル用メニューやコンテンツを追加
           ],
@@ -210,11 +211,12 @@ class JobTab extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.fromLTRB(22, 12, 20, 16),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-              ),
-              color: Color.fromARGB(255, 80, 105, 246)),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+            ),
+            color: MainColors.primaryColor,
+          ),
           child: const Text(
             '求職者の方はこちら',
             style: TextStyle(

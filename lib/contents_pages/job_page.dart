@@ -2,22 +2,22 @@ import 'package:flutter/material.dart'; // ContentsTextをインポート
 import 'package:shime_kouiki_homepage/contents_munu.dart';
 import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポートするため
 import 'package:shime_kouiki_homepage/address_unit.dart'; // AddressUnitをインポート
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 // import 'dart:math' as math; // 必要なら後で追加
 
-class TomoyamaEn extends StatefulWidget {
+class JobPage extends StatefulWidget {
   final Function(MenuType) onMenuSelected;
 
-  const TomoyamaEn({
+  const JobPage({
     super.key,
     required this.onMenuSelected,
   });
 
   @override
-  State<TomoyamaEn> createState() => _TomoyamaEnState();
+  State<JobPage> createState() => _JobPageState();
 }
 
-class _TomoyamaEnState extends State<TomoyamaEn>
-    with SingleTickerProviderStateMixin {
+class _JobPageState extends State<JobPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,8 @@ class _TomoyamaEnState extends State<TomoyamaEn>
               },
             ),
             Center(
-              child: Text('ともやま苑'),
+              child:
+                  Text('求職者の方', style: TextStyle(color: MainColors.textColor)),
             ),
             const AddressUnit(),
           ],

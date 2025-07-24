@@ -2,21 +2,22 @@ import 'package:flutter/material.dart'; // ContentsTextをインポート
 import 'package:shime_kouiki_homepage/contents_munu.dart';
 import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポートするため
 import 'package:shime_kouiki_homepage/address_unit.dart'; // AddressUnitをインポート
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 // import 'dart:math' as math; // 必要なら後で追加
 
-class SainiwaRyo extends StatefulWidget {
+class TomoyamaEn extends StatefulWidget {
   final Function(MenuType) onMenuSelected;
 
-  const SainiwaRyo({
+  const TomoyamaEn({
     super.key,
     required this.onMenuSelected,
   });
 
   @override
-  State<SainiwaRyo> createState() => _SainiwaRyoState();
+  State<TomoyamaEn> createState() => _TomoyamaEnState();
 }
 
-class _SainiwaRyoState extends State<SainiwaRyo>
+class _TomoyamaEnState extends State<TomoyamaEn>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
@@ -39,7 +40,10 @@ class _SainiwaRyoState extends State<SainiwaRyo>
               },
             ),
             Center(
-              child: Text('才庭寮'),
+              child: Text(
+                'ともやま苑',
+                style: TextStyle(color: MainColors.textColor),
+              ),
             ),
             const AddressUnit(),
           ],

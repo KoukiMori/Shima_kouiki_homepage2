@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 
 class ContentsText extends StatefulWidget {
   final String title;
@@ -123,7 +124,7 @@ class _ContentsTextState extends State<ContentsText> {
                 style: TextStyle(
                   fontSize: _isHover ? 16 : 14,
                   fontWeight: _isHover ? FontWeight.bold : FontWeight.w400,
-                  color: _isHover ? Colors.white : Colors.black,
+                  color: _isHover ? Colors.white : MainColors.textColor,
                   decoration: TextDecoration.none,
                 ),
                 child: Text(widget.title),
@@ -134,7 +135,7 @@ class _ContentsTextState extends State<ContentsText> {
                   duration: const Duration(milliseconds: 200),
                   child: Icon(
                     Icons.arrow_right,
-                    color: _isHover ? Colors.white : Colors.black,
+                    color: _isHover ? Colors.white : MainColors.textColor,
                   ),
                 ),
             ],
@@ -154,7 +155,7 @@ class TextContent extends StatelessWidget {
     super.key,
     required this.title,
     this.textSize = 12,
-    this.color = Colors.black,
+    this.color = const Color(0xff666666), // MainColors.textColorと同じ値を定数として設定
     this.textWeight = FontWeight.w500,
   });
 
@@ -192,8 +193,9 @@ class _SubMenuTextState extends State<SubMenuText> {
       child: Text(
         widget.title,
         style: TextStyle(
-          color:
-              _isHover ? const Color.fromARGB(255, 80, 105, 246) : Colors.black,
+          color: _isHover
+              ? const Color.fromARGB(255, 80, 105, 246)
+              : MainColors.textColor,
           fontSize: 12,
           fontWeight: FontWeight.w400,
           decoration: TextDecoration.none,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shime_kouiki_homepage/contents_munu.dart';
-import 'package:shime_kouiki_homepage/contents_text.dart'; // ContentsTextをインポート
 import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポートするため
-import 'package:shime_kouiki_homepage/topic.dart'; // Topicモデルをインポート
+import 'package:shime_kouiki_homepage/contents_pages/top_page_content/topic.dart'; // Topicモデルをインポート
 import 'package:shime_kouiki_homepage/address_unit.dart'; // AddressUnitをインポート
+import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
 // import 'dart:math' as math; // 必要なら後で追加
 
 class TopPageContents extends StatefulWidget {
@@ -40,34 +40,47 @@ class _TopPageContentsState extends State<TopPageContents>
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40.0), // 上下の余白
               child: Column(
-                spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 12,
                 children: [
-                  Text(
-                    '1977年',
-                    style: GoogleFonts.zenAntique(
-                        fontSize: 80,
-                        fontWeight: FontWeight.w300,
-                        height: 1.1,
-                        decoration: TextDecoration.none,
-                        color: Colors.black),
+                  Column(
+                    children: [
+                      Text(
+                        '1977年',
+                        style: GoogleFonts.notoSansJavanese(
+                            fontSize: 80,
+                            fontWeight: FontWeight.w300,
+                            height: 1.1,
+                            decoration: TextDecoration.none,
+                            color: MainColors.textColor),
+                      ),
+                      Text(
+                        '昭和52年',
+                        style: GoogleFonts.notoSansJavanese(
+                            fontSize: 16,
+                            height: .03,
+                            fontWeight: FontWeight.w300,
+                            decoration: TextDecoration.none,
+                            color: MainColors.textColor),
+                      ),
+                    ],
                   ),
                   Text(
                     '志摩の介護',
-                    style: GoogleFonts.zenAntique(
+                    style: GoogleFonts.notoSansJavanese(
                         fontSize: 41,
                         fontWeight: FontWeight.w300,
-                        height: 1.2,
+                        height: 1.8,
                         decoration: TextDecoration.none,
-                        color: Colors.black),
+                        color: MainColors.textColor),
                   ),
                   Text(
                     'ここから始まりました。',
-                    style: GoogleFonts.zenAntique(
+                    style: GoogleFonts.notoSansJavanese(
                       fontSize: 30,
                       fontWeight: FontWeight.w500,
-                      height: 1.4,
-                      color: Colors.black,
+                      height: 1.1,
+                      color: MainColors.textColor,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -75,9 +88,9 @@ class _TopPageContentsState extends State<TopPageContents>
                   Text(
                     textAlign: TextAlign.center,
                     '私たちは志摩市で最初に設立された\n介護施設として地域の皆さまと歩んできました。\n長年の経験と実績をもとに、\nこれからも安心とぬくもりの介護を提供してまいります。',
-                    style: GoogleFonts.zenAntique(
+                    style: GoogleFonts.notoSansJavanese(
                       fontSize: 16,
-                      color: Colors.black87,
+                      color: MainColors.textColor,
                       height: 1.7,
                       fontWeight: FontWeight.w500,
                       decoration: TextDecoration.none,
@@ -119,7 +132,7 @@ class _TopPageContentsState extends State<TopPageContents>
                         top: 50, left: 20, right: 20, bottom: 20),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.red,
+                        color: MainColors.accentColor,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(20),
@@ -139,7 +152,7 @@ class _TopPageContentsState extends State<TopPageContents>
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                     decoration: TextDecoration.none,
-                                    color: Colors.grey.shade800,
+                                    color: MainColors.textColor,
                                   ),
                                 ),
                                 Expanded(
@@ -148,7 +161,7 @@ class _TopPageContentsState extends State<TopPageContents>
                                     style: TextStyle(
                                       fontSize: 14,
                                       decoration: TextDecoration.none,
-                                      color: Colors.grey.shade800,
+                                      color: MainColors.textColor,
                                     ),
                                   ),
                                 ),
@@ -165,12 +178,12 @@ class _TopPageContentsState extends State<TopPageContents>
                     child: Container(
                       width: 120,
                       height: 40,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20),
                         ),
-                        color: Colors.blue,
+                        color: MainColors.primaryColor,
                       ),
                       padding: const EdgeInsets.only(left: 20, top: 4),
                       child: const Text(
