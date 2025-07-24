@@ -74,7 +74,7 @@ class _TopPageContentsState extends State<TopPageContents>
                   const SizedBox(height: 8),
                   Text(
                     textAlign: TextAlign.center,
-                    '私たちは、志摩市で最初に設立された\n介護施設として、地域の皆さまと歩んできました。\n長年の経験と実績をもとに、\nこれからも安心とぬくもりの介護を提供してまいります。',
+                    '私たちは志摩市で最初に設立された\n介護施設として地域の皆さまと歩んできました。\n長年の経験と実績をもとに、\nこれからも安心とぬくもりの介護を提供してまいります。',
                     style: GoogleFonts.zenAntique(
                       fontSize: 16,
                       color: Colors.black87,
