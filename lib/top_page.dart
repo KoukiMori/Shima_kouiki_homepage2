@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shime_kouiki_homepage/faclilities/hanazono_ryo.dart';
+import 'package:shime_kouiki_homepage/faclilities/sainiwa_ryo.dart';
+import 'package:shime_kouiki_homepage/faclilities/tomoyama_en.dart';
+import 'package:shime_kouiki_homepage/job_page.dart'; // JobPageを追加
 import 'top_page_contents.dart';
 import 'package:google_fonts/google_fonts.dart'; // GoogleFontsを追加
 
@@ -14,6 +18,7 @@ enum MenuType {
   reikishu,
   nyusatsu,
   sonota,
+  jobPage, // JobPageを追加
   // 住所連絡先はnullで管理
 }
 
@@ -34,10 +39,23 @@ class _TopPageState extends State<TopPage> {
     return Stack(
       children: [
         _buildMainContent(width),
-        const Positioned(
+        Positioned(
           right: 0,
           top: 0,
-          child: JobTab(),
+          child: JobTab(
+            onTap: () {
+              setState(() {
+                selectedMenu = MenuType.jobPage;
+                JobPage(
+                  onMenuSelected: (_) {
+                    setState(() {
+                      selectedMenu = MenuType.jobPage;
+                    });
+                  },
+                );
+              });
+            },
+          ),
         ),
       ],
     );
@@ -52,114 +70,104 @@ class _TopPageState extends State<TopPage> {
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 40),
             width: containerWidth * .8,
-            // color: Colors.orange,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      '志摩広域行政組合',
-                      style: GoogleFonts.notoSansJavanese(
-                        // M PLUS 1pフォントを適用 (キャメルケースで修正)
-                        fontSize: 32,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.grey.shade600,
+                // 志摩広域行政組合と読み仮名をタップでトップページに移動
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedMenu = MenuType.home;
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      Text(
+                        '志摩広域行政組合',
+                        style: GoogleFonts.notoSansJavanese(
+                          fontSize: 32,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'しまこういきぎょうせいくみあい',
-                      style: GoogleFonts.notoSansJavanese(
-                        // M PLUS 1pフォントを適用 (キャメルケースで修正)
-                        fontSize: 12,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.grey.shade600,
+                      Text(
+                        'しまこういきぎょうせいくみあい',
+                        style: GoogleFonts.notoSansJavanese(
+                          fontSize: 12,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w100,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
+                const SizedBox(height: 20),
+
                 Container(
                   color: Colors.white,
-                  child: _buildRightContent(),
+                  child: _buildDownContent(),
                 ),
               ],
             ),
           ),
         ),
       );
-    } else if (width > 480) {
-      // タブレット用（省略）
-      content = Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: width * .02),
-            color: Colors.green,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.red,
-                    child: Container(
-                      color: Colors.yellow,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(color: Colors.blue),
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
     } else {
-      // スマホ用（省略）
-      content = Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: width * .02),
-            color: Colors.green,
-            child: Column(
-              children: [
-                Container(
-                  height: 60,
-                  color: Colors.grey,
-                ),
-                Container(
-                  height: 120,
-                  color: Colors.blue,
-                ),
-              ],
+      // タブレット・スマホ用は簡略化（必要であれば後で詳細化）
+      content = Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'モバイルレイアウト',
+              style: TextStyle(fontSize: 24, color: Colors.black),
             ),
-          ),
-        ],
+            // 必要に応じてモバイル用メニューやコンテンツを追加
+          ],
+        ),
       );
     }
     return content;
   }
 
-  // 右側のメインコンテンツを選択状態で切り替え
-  Widget _buildRightContent() {
+  // メインコンテンツを選択状態で切り替え
+  Widget _buildDownContent() {
     switch (selectedMenu) {
       case MenuType.home:
         return TopPageContents(
-          onMenuSelected: (nemuType) {
+          onMenuSelected: (menuType) {
             setState(() {
-              selectedMenu = nemuType;
+              selectedMenu = menuType;
             });
           },
         );
       case MenuType.sainiwaryo:
-        return const Center(child: Text('才庭寮のコンテンツ'));
+        return SainiwaRyo(
+          onMenuSelected: (menuType) {
+            setState(() {
+              selectedMenu = menuType;
+            });
+          },
+        );
       case MenuType.tomoyamaen:
-        return const Center(child: Text('ともやま苑のコンテンツ'));
+        return TomoyamaEn(
+          onMenuSelected: (menuType) {
+            setState(() {
+              selectedMenu = menuType;
+            });
+          },
+        );
       case MenuType.hanazonoryo:
-        return const Center(child: Text('花園寮のコンテンツ'));
+        return HanazonoRyo(
+          onMenuSelected: (menuType) {
+            setState(() {
+              selectedMenu = menuType;
+            });
+          },
+        );
       case MenuType.fukushicenter:
         return const Center(child: Text('福祉センターのコンテンツ'));
       case MenuType.nyushononagare:
@@ -172,16 +180,26 @@ class _TopPageState extends State<TopPage> {
         return const Center(child: Text('入札情報のコンテンツ'));
       case MenuType.sonota:
         return const Center(child: Text('その他のコンテンツ'));
+      case MenuType.jobPage:
+        return JobPage(
+          onMenuSelected: (menuType) {
+            setState(() {
+              selectedMenu = menuType;
+            });
+          },
+        ); // JobPageを表示
       default:
-        // 住所連絡先や未選択時は何も表示しない
         return const SizedBox.shrink();
     }
   }
 }
 
 class JobTab extends StatelessWidget {
-  const JobTab({
+  final VoidCallback onTap;
+
+  JobTab({
     super.key,
+    required this.onTap,
   });
 
   @override
@@ -189,7 +207,7 @@ class JobTab extends StatelessWidget {
     return Positioned(
       right: 0,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           padding: const EdgeInsets.fromLTRB(22, 12, 20, 16),
           decoration: const BoxDecoration(

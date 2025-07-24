@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shime_kouiki_homepage/contents_munu.dart';
 import 'package:shime_kouiki_homepage/contents_text.dart'; // ContentsTextをインポート
 import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポートするため
 import 'package:shime_kouiki_homepage/topic.dart'; // Topicモデルをインポート
@@ -86,104 +87,11 @@ class _TopPageContentsState extends State<TopPageContents>
               ),
             ),
             // メニュー部分を復元
-            Container(
-              margin: const EdgeInsets.fromLTRB(80, 50, 80, 0),
-              child: Row(
-                spacing: 18,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // トップページボタン
-                  ContentsText(
-                    onTap: () {
-                      widget.onMenuSelected(MenuType.home);
-                    },
-                    title: 'トップページ',
-                    showArrow: false,
-                  ),
-                  // 施設紹介
-                  ContentsText(
-                    onTap: () {},
-                    title: '施設紹介',
-                    subMenu: [
-                      ContentsText(
-                        title: '才庭寮',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.sainiwaryo);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: 'ともやま苑',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.tomoyamaen);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: '花園寮',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.hanazonoryo);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: '福祉センター',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.fukushicenter);
-                        },
-                        showArrow: false,
-                      ),
-                    ],
-                  ),
-                  // 入所の流れ
-                  ContentsText(
-                    onTap: () {
-                      widget.onMenuSelected(MenuType.nyushononagare);
-                    },
-                    title: '入所の流れ',
-                    showArrow: false,
-                  ),
-                  // その他
-                  ContentsText(
-                    onTap: () {
-                      widget.onMenuSelected(MenuType.sonota);
-                    },
-                    title: 'その他',
-                    subMenu: [
-                      ContentsText(
-                        title: '組合概要',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.kumiai);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: '例規集',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.reikishu);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: '入札情報',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.nyusatsu);
-                        },
-                        showArrow: false,
-                      ),
-                      ContentsText(
-                        title: '取り組みについて',
-                        onTap: () {
-                          widget.onMenuSelected(MenuType.sonota); // 仮にsonotaに設定
-                        },
-                        showArrow: false,
-                      ),
-                    ],
-                    showArrow: true, // ここをtrueに変更
-                  ),
-                ],
-              ),
+            ContentsMumu(
+              onMenuSelected: (menuType) {
+                // 正しい構文でコールバックを渡す
+                widget.onMenuSelected(menuType); // 親のonMenuSelectedを呼び出す
+              },
             ),
 
             // 2. hands.png 画像部分
