@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shime_kouiki_homepage/content_text.dart';
 import 'package:shime_kouiki_homepage/top_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
