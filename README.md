@@ -1,4 +1,4 @@
-# shime_kouiki_homepage
+# shima_kouiki_homepage
 
 A new Flutter project.
 
