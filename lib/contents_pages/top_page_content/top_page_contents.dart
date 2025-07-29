@@ -5,6 +5,7 @@ import 'package:shime_kouiki_homepage/top_page.dart'; // MenuTypeをインポー
 import 'package:shime_kouiki_homepage/contents_pages/top_page_content/topic.dart'; // Topicモデルをインポート
 import 'package:shime_kouiki_homepage/address_unit.dart'; // AddressUnitをインポート
 import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート
+import 'package:shime_kouiki_homepage/animated_text_widget.dart'; // アニメーションテキストウィジェット
 // import 'dart:math' as math; // 必要なら後で追加
 
 class TopPageContents extends StatefulWidget {
@@ -38,44 +39,47 @@ class _TopPageContentsState extends State<TopPageContents>
           children: [
             // 1. メインテキスト部分
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0), // 上下の余白
+              padding: const EdgeInsets.symmetric(vertical: 60.0), // 上下の余白
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 12,
                 children: [
                   Column(
                     children: [
-                      Text(
-                        '1977年',
+                      AnimatedTextWidget(
+                        text: '1977年',
                         style: GoogleFonts.notoSansJavanese(
                             fontSize: 80,
                             fontWeight: FontWeight.w300,
-                            height: 1.1,
+                            height: .6,
                             decoration: TextDecoration.none,
                             color: MainColors.textColor),
+                        delay: const Duration(milliseconds: 200),
                       ),
-                      Text(
-                        '昭和52年',
+                      AnimatedTextWidget(
+                        text: '昭和52年',
                         style: GoogleFonts.notoSansJavanese(
                             fontSize: 16,
-                            height: .03,
+                            height: .9,
                             fontWeight: FontWeight.w300,
                             decoration: TextDecoration.none,
                             color: MainColors.textColor),
+                        delay: const Duration(milliseconds: 600),
                       ),
                     ],
                   ),
-                  Text(
-                    '志摩の介護',
+                  AnimatedTextWidget(
+                    text: '志摩の介護',
                     style: GoogleFonts.notoSansJavanese(
                         fontSize: 41,
                         fontWeight: FontWeight.w300,
                         height: 1.8,
                         decoration: TextDecoration.none,
                         color: MainColors.textColor),
+                    delay: const Duration(milliseconds: 1000),
                   ),
-                  Text(
-                    'ここから始まりました。',
+                  AnimatedTextWidget(
+                    text: 'ここから始まりました。',
                     style: GoogleFonts.notoSansJavanese(
                       fontSize: 30,
                       fontWeight: FontWeight.w500,
@@ -83,11 +87,12 @@ class _TopPageContentsState extends State<TopPageContents>
                       color: MainColors.textColor,
                       decoration: TextDecoration.none,
                     ),
+                    delay: const Duration(milliseconds: 1400),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    textAlign: TextAlign.center,
-                    '私たちは志摩市で最初に設立された\n介護施設として地域の皆さまと歩んできました。\n長年の経験と実績をもとに、\nこれからも安心とぬくもりの介護を提供してまいります。',
+                  AnimatedTextWidget(
+                    text:
+                        '私たちは志摩市で最初に設立された\n介護施設として地域の皆さまと歩んできました。\n長年の経験と実績をもとに、\nこれからも安心とぬくもりの介護を提供してまいります。',
                     style: GoogleFonts.notoSansJavanese(
                       fontSize: 16,
                       color: MainColors.textColor,
@@ -95,6 +100,7 @@ class _TopPageContentsState extends State<TopPageContents>
                       fontWeight: FontWeight.w500,
                       decoration: TextDecoration.none,
                     ),
+                    delay: const Duration(milliseconds: 1800),
                   ),
                 ],
               ),
@@ -107,22 +113,10 @@ class _TopPageContentsState extends State<TopPageContents>
               },
             ),
 
-            // 2. hands.png 画像部分
-            SizedBox(
-              width: width * 0.7 > 1500 ? 1500 : width * 0.7, // 1500px制限を考慮
-              height: 400, // 高さを固定
-              child: Image.asset(
-                'assets/images/hands.png',
-                fit: BoxFit.contain, // または BoxFit.fitHeight
-                // scale: 2, // 必要に応じて調整
-                // colorBlendMode: BlendMode.screen, // 必要に応じて調整
-              ),
-            ),
-
             // 3. お知らせリスト部分
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
               child: Stack(
                 children: [
                   Container(

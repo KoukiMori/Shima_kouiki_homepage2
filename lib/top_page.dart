@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shime_kouiki_homepage/contents_pages/faclilities/hanazono_ryo.dart';
+import 'package:shime_kouiki_homepage/contents_pages/faclilities/job_page.dart';
 import 'package:shime_kouiki_homepage/contents_pages/faclilities/sainiwa_ryo.dart';
 import 'package:shime_kouiki_homepage/contents_pages/faclilities/tomoyama_en.dart';
-import 'package:shime_kouiki_homepage/contents_pages/job_page.dart'; // JobPageを追加
 import 'contents_pages/top_page_content/top_page_contents.dart';
 import 'package:google_fonts/google_fonts.dart'; // GoogleFontsを追加
 import 'package:shime_kouiki_homepage/colors.dart'; // MainColorsをインポート

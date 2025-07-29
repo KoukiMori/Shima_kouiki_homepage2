@@ -17,6 +17,7 @@ class ContentsText extends StatefulWidget {
     this.textWeight = FontWeight.w500,
     this.subMenu,
     this.showArrow = true,
+    required String assetsName,
   });
 
   @override
@@ -62,10 +63,10 @@ class _ContentsTextState extends State<ContentsText> {
                 boxShadow: [
                   // 影を再現
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 21),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -75,7 +76,7 @@ class _ContentsTextState extends State<ContentsText> {
                 children: (widget.subMenu ?? [])
                     .map((sub) => Padding(
                           padding: const EdgeInsets.only(
-                              left: 16, top: 6, bottom: 6),
+                              left: 16, top: 16, bottom: 6),
                           child: sub,
                         ))
                     .toList(),

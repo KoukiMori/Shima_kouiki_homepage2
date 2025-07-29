@@ -9,6 +9,7 @@ class ContentsText extends StatefulWidget {
   final List<Widget>? subMenu;
   final bool showArrow;
   final bool isSelected; // 新しいプロパティ
+  final String assetsName;
 
   const ContentsText({
     super.key,
@@ -18,7 +19,8 @@ class ContentsText extends StatefulWidget {
     this.textWeight = FontWeight.w500,
     this.subMenu,
     this.showArrow = true,
-    this.isSelected = false, // デフォルトはfalse
+    this.isSelected = false,
+    this.assetsName = '',
   });
 
   @override
@@ -46,65 +48,90 @@ class _ContentsTextState extends State<ContentsText> {
   @override
   Widget build(BuildContext context) {
     // ホバーまたは展開（クリック）でハイライト
-    final bool _isHighlighted = _isHover || _isExpanded;
+    final bool isHighlighted = _isHover || _isExpanded;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // メインメニューアイテム
-        GestureDetector(
-          onTap: () {
-            // クリックでサブメニューの開閉を切り替える
-            if (widget.subMenu != null) {
-              setState(() {
-                _isExpanded = !_isExpanded;
-              });
-            }
-            widget.onTap(); // 親のonTap（MenuType変更）を呼び出す
-          },
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300), // アニメーション時間を延長
+          curve: Curves.easeInOut, // 滑らかなカーブ
+          transform: Matrix4.identity()
+            ..scale(_isHover ? 1.05 : 1.0), // ホバー時に軽く拡大
+
           child: MouseRegion(
-            onEnter: (_) => setState(() => _isHover = true),
+            onEnter: (_) {
+              setState(() => _isHover = true);
+            },
             onExit: (_) {
               setState(() => _isHover = false);
             },
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 8,
-              ),
-              decoration: BoxDecoration(
-                color: _isHighlighted // ホバーまたはクリックでハイライト
-                    ? const Color.fromARGB(255, 80, 105, 246)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: _isHover ? 18 : 14, // ホバーでサイズ変化
-                      fontWeight:
-                          _isHighlighted ? FontWeight.bold : FontWeight.w800,
-                      color:
-                          _isHighlighted ? Colors.white : MainColors.textColor,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  if (widget.showArrow && widget.subMenu != null)
-                    AnimatedRotation(
-                      turns: _isExpanded ? 0.25 : 0, // 展開状態に応じて回転
-                      duration: const Duration(milliseconds: 200),
-                      child: Icon(
-                        Icons.arrow_right,
-                        color: _isHighlighted
-                            ? Colors.white
-                            : MainColors.textColor,
-                        size: 30,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+                widget.onTap();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 8,
+                ),
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      child: Image.asset(
+                        widget.assetsName,
+                        width: 180,
+                        height: 180,
+                        fit: BoxFit.cover,
+                        scale: 1,
                       ),
                     ),
-                ],
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 300),
+                            style: TextStyle(
+                              fontSize: _isHover ? 18 : 14, // ホバーでサイズ変化
+                              fontWeight: isHighlighted
+                                  ? FontWeight.bold
+                                  : FontWeight.w800,
+                              color: const Color.fromARGB(255, 14, 85, 249),
+                              decoration: TextDecoration.none,
+                            ),
+                            child: Text(widget.title),
+                          ),
+                          if (widget.showArrow && widget.subMenu != null)
+                            AnimatedRotation(
+                              turns: _isExpanded ? 0.25 : 0, // 展開状態に応じて回転
+                              duration: const Duration(milliseconds: 300),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                padding: const EdgeInsets.all(2),
+                                child: Icon(
+                                  Icons.arrow_right,
+                                  color: const Color.fromARGB(255, 14, 85, 249),
+                                  size: _isHover ? 32 : 30,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -113,33 +140,64 @@ class _ContentsTextState extends State<ContentsText> {
         // サブメニュー（展開時のみ表示）
         if (widget.subMenu != null)
           AnimatedSize(
-            duration: const Duration(milliseconds: 300), // ゆっくり展開
-            curve: Curves.easeOut,
+            duration: const Duration(milliseconds: 400), // ゆっくり展開
+            curve: Curves.easeOutCubic,
             child: _isExpanded // 展開状態に応じて表示
-                ? Container(
-                    margin: const EdgeInsets.only(left: 16, top: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white, // サブメニュー背景色
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
+                ? AnimatedOpacity(
+                    opacity: _isExpanded ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 300),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 400),
+                      margin: const EdgeInsets.only(left: 16, top: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: MainColors.primaryColor.withOpacity(0.15),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: MainColors.primaryColor.withOpacity(0.2),
+                          width: 1,
                         ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min, // 高さを最小限に
-                      children: widget.subMenu!.map((subItem) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          child:
-                              subItem, // subItem自体がContentsTextであるため、内部でホバー効果を持つ
-                        );
-                      }).toList(),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: widget.subMenu!.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          Widget subItem = entry.value;
+
+                          return TweenAnimationBuilder(
+                            duration: Duration(
+                                milliseconds: 300 + (index * 100)), // スタガード効果
+                            tween: Tween<double>(begin: 0.0, end: 1.0),
+                            builder: (context, double value, child) {
+                              return Transform.translate(
+                                offset:
+                                    Offset(0, 20 * (1 - value)), // 下から上にスライド
+                                child: Opacity(
+                                  opacity: value,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6, horizontal: 12),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Colors.transparent,
+                                      ),
+                                      child: subItem,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
                   )
                 : const SizedBox.shrink(),
