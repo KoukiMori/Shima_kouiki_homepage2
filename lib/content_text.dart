@@ -92,6 +92,7 @@ class _ContentsTextState extends State<ContentsText> {
   Widget build(BuildContext context) {
     return GestureDetector(
       // GestureDetectorをMouseRegionの外に移動
+
       onTap: widget.onTap,
       child: MouseRegion(
         onEnter: (_) {
@@ -107,6 +108,7 @@ class _ContentsTextState extends State<ContentsText> {
           _overlayEntry = null;
         },
         child: AnimatedContainer(
+          
           duration: const Duration(milliseconds: 450),
           curve: Curves.ease,
           padding: EdgeInsets.symmetric(
